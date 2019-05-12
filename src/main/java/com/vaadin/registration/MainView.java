@@ -13,78 +13,83 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.tshirtshop;
+package com.vaadin.registration;
 
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.tshirtshop.domain.TShirtOrder;
+import com.vaadin.registration.domain.Registration;
 
 @StyleSheet("frontend://src/styles.css")
 @Route
 public class MainView extends VerticalLayout {
 
-    TShirtService service;
+    private transient RegistrationService service;
 
-    Binder<TShirtOrder> binder = new BeanValidationBinder<>(TShirtOrder.class);
+    private Binder<Registration> binder = new BeanValidationBinder<>(Registration.class);
 
-    TextField name = new TextField("Name");
-    TextField email = new TextField("Email");
-    ComboBox<String> shirtSize = new ComboBox("T-shirt size");
+    private TextField name = new TextField("Name");
+    private EmailField email = new EmailField("Email");
+    private ComboBox<String> shirtSize = new ComboBox<>("T-shirt size");
 
-    public MainView(TShirtService service) {
+    public MainView(RegistrationService service) {
         this.service = service;
 
         // Build the layout
-        H1 heading = new H1("Order a cool Vaadin }> T-shirt!");
-        Button order = new Button("Place order");
+        H1 heading = new H1("Register to win a Vaadin }> iPad!");
+        Button submit = new Button("Register to win!");
         setDefaultHorizontalComponentAlignment(FlexLayout.Alignment.CENTER);
-        RouterLink listOrders = new RouterLink("View orders", ListOrdersView.class);
+        RouterLink listOrders = new RouterLink("View registrations", ListRegistrationsView.class);
         add(
                 heading,
                 name,
                 email,
                 shirtSize,
-                order,
+                submit,
                 listOrders
         );
 
         // configure components
         shirtSize.setItems(service.getSizes());
 
-        order.addClickListener(e -> {
+        submit.addClickListener(e -> {
             submitOrder();
             String msg = String.format(
-                    "Thank you %s, your order for T-shirt (%s) was submitted!",
-                    binder.getBean().getName(), binder.getBean().getShirtSize());
+                    "Thank you %s, your registration was submitted!",
+                    binder.getBean().getName());
             Notification.show(msg, 3000, Notification.Position.MIDDLE);
             init();
         });
 
-        // Bind fields from this UI class to domain object using naming convetion
+
+        // Add keyboard shortcut
+        submit.addClickShortcut(Key.ENTER);
+
+        // Bind fields from this UI class to domain object using naming convention
         binder.bindInstanceFields(this);
         // enable save button only if the bean is valid
-        binder.addStatusChangeListener(e -> order.setEnabled(binder.isValid()));
+        binder.addStatusChangeListener(e -> submit.setEnabled(binder.isValid()));
 
         init();
     }
 
     private void submitOrder() {
-        service.placeOrder(binder.getBean());
+        service.register(binder.getBean());
     }
 
     private void init() {
-        binder.setBean(new TShirtOrder());
+        binder.setBean(new Registration());
     }
 
 }

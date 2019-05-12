@@ -1,4 +1,4 @@
-package com.vaadin.tshirtshop.domain;
+package com.vaadin.registration.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +7,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.Size;
-
 /**
  * Created by mstahv
  */
 @Entity
-public class TShirtOrder {
+public class Registration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +25,10 @@ public class TShirtOrder {
     @NotEmpty
     private String shirtSize;
 
-    public TShirtOrder() {
+    public Registration() {
     }
 
-    public TShirtOrder(String name, String email, String shirtSize) {
+    public Registration(String name, String email, String shirtSize) {
         this.name = name;
         this.email = email;
         this.shirtSize = shirtSize;

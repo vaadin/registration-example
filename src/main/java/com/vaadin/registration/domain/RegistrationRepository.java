@@ -1,11 +1,11 @@
 
-package com.vaadin.tshirtshop.domain;
+package com.vaadin.registration.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Empty JpaRepository is enough for a simple crud.
  */
-public interface TShirtOrderRepository extends JpaRepository<TShirtOrder, Long> {
+public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     
 }

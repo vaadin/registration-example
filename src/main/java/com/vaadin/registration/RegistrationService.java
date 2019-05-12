@@ -1,7 +1,7 @@
-package com.vaadin.tshirtshop;
+package com.vaadin.registration;
 
-import com.vaadin.tshirtshop.domain.TShirtOrder;
-import com.vaadin.tshirtshop.domain.TShirtOrderRepository;
+import com.vaadin.registration.domain.Registration;
+import com.vaadin.registration.domain.RegistrationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -12,17 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  * A service class for the UI to access backend services.
  */
 @Service
-class TShirtService {
+class RegistrationService {
     
     @Autowired
-    private TShirtOrderRepository repository;
+    private RegistrationRepository repository;
 
-    List<String> getSizes() {
+    public List<String> getSizes() {
         return Arrays.asList("Small", "Medium", "Large", "Extra Large", "XXL");
     }
 
-    public void placeOrder(TShirtOrder order) throws IllegalArgumentException {
-        repository.save(order);
+    public void register(Registration registration) {
+        repository.save(registration);
     }
 
 }

@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vaadin.flow.demo</groupId>
-    <artifactId>tshirt-example</artifactId>
+    <artifactId>registration-example</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <name>T-shirt shope example</name>
+    <name>Registration app example</name>
     <packaging>jar</packaging>
 
     <properties>
@@ -40,7 +40,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>11.0.1</version>
+                <version>13.0.6</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

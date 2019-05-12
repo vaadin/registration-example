@@ -13,42 +13,34 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.vaadin.tshirtshop;
+package com.vaadin.registration;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.tshirtshop.domain.TShirtOrder;
-import com.vaadin.tshirtshop.domain.TShirtOrderRepository;
+import com.vaadin.registration.domain.Registration;
+import com.vaadin.registration.domain.RegistrationRepository;
 
 @Route
-public class ListOrdersView extends VerticalLayout {
+public class ListRegistrationsView extends VerticalLayout {
     
-    private final TShirtOrderRepository repo;
-    final Grid<TShirtOrder> orders = new Grid<>(TShirtOrder.class);
+    private final transient RegistrationRepository repo;
+    private final Grid<Registration> registrations = new Grid<>(Registration.class);
     
-    public ListOrdersView(TShirtOrderRepository repo) {
+    public ListRegistrationsView(RegistrationRepository repo) {
         this.repo = repo;
         // Build the layout
-        H1 heading = new H1("List of submitted orders");
+        H1 heading = new H1("List of submitted registrations");
         Button update = new Button(VaadinIcon.REFRESH.create());
-        RouterLink orderView = new RouterLink("Submit new order", MainView.class);
-        add(heading, update, orders, orderView);
+        RouterLink orderView = new RouterLink("Submit new registration", MainView.class);
+        add(heading, update, registrations, orderView);
         
-        orders.setColumns("name", "email", "shirtSize");
-        orders.addComponentColumn(order -> {
+        registrations.setColumns("name", "email", "shirtSize");
+        registrations.addComponentColumn(order -> {
             Button deleteBtn = new Button(VaadinIcon.TRASH.create());
             deleteBtn.addClickListener(e -> {
                 repo.delete(order);
@@ -63,7 +55,7 @@ public class ListOrdersView extends VerticalLayout {
     }
 
     public void listOrders() {
-        orders.setItems(repo.findAll());
+        registrations.setItems(repo.findAll());
     }
     
 }
