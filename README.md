@@ -2,7 +2,7 @@
 
 The example contains a view that submits competition registrations. The UI is similar to what you might have seen in Vaadin expo booth. 
 
-<img src="https://raw.githubusercontent.com/vaadin/registration-example/master/screenshot.png" alt="T-shirt Shop" title="T-shirt Shop" width="50%">
+<img src="https://raw.githubusercontent.com/vaadin/registration-example/master/screenshot.png" alt="Registration example app" title="Registration example app" width="50%">
 
 In addition this version submits the registrations to a [JPA backend](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/), validates the data automatically based on [JSR-303 annotations](https://beanvalidation.org/specification/) in the domain object and also contains a view to list current submissions.
 
