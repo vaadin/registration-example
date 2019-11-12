@@ -39,10 +39,11 @@ public class MainView extends VerticalLayout {
 
     private Binder<Registration> binder = new BeanValidationBinder<>(Registration.class);
 
-    private TextField name = new TextField("Name");
-    private EmailField email = new EmailField("Email");
+    private TextField name = new TextField("Name","Enter your name");
+    private EmailField email = new EmailField("Email","Enter your e-mail");
     private ComboBox<String> shirtSize = new ComboBox<>("T-shirt size");
-
+    shirtSize.setPlaceHolder("Choose your size");
+    
     public MainView(RegistrationService service) {
         this.service = service;
 
